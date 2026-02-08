@@ -15,9 +15,9 @@
 #define TBLE_MIT     1
 // #define TBLE_DUAL_2U 1
 
-#define RAISE_L 1
-#define LOWER_L 2
-#define SYS_L 3
+#define NAV_L 1
+#define NUM_L 2
+#define SYM_L 3
 
 // Using layer taps on thumbs, having quick tap as well helps w/ repeating space/backspace
 &lt { quick_tap_ms = <200>; };
@@ -54,17 +54,6 @@
 	};
     };
 
-// Conditional layer only when we have less thumb keys
-#ifdef TBLE_DUAL_2U
-    cond_layers {
-        compatible = "zmk,conditional-layers";
-	tri {
-	    if-layers = <NUM_L NAV_L>;
-	    then-layer = <SYM_L>;
-        };
-    };
-#endif
-
     keymap {
         compatible = "zmk,keymap";
 
@@ -83,31 +72,15 @@
 #ifdef TBLE_DUAL_2U
  &trans     &trans     &trans     &trans                 &trans       &trans                   &trans     &trans     &trans     &trans
 #elif defined(TBLE_MIT)
- &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT   &mo LOWER_L       &trans            &mo RAISE_L   &kc LEFT   &kc DOWN   &kc UP     &kc RIGHT
+ &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT   &mo NUM_L         &trans            &mo NAV_L     &kc LEFT   &kc DOWN   &kc UP     &kc RIGHT
 #else
  &trans     &trans     &trans     &trans     &trans      &trans       &trans     &trans        &trans     &trans     &trans     &trans
 #endif
             >;
         };
 
-        sys_layer {
-            label = "Sys";
-            bindings = <
- &none     &bt BT_CLR     &none       &none       &none       &none       &none     &none     &none      &none     &kc CAPS   &none
- &none     &none          &none       &none       &none       &none       &none     &none     &none      &none     &none      &none
- &none     &bt BT(0)      &bt BT(1)   &bt BT(2)   &bt BT(3)   &bt BT(4)   &none     &none     &none      &none     &none      &none
-#ifdef TBLE_DUAL_2U
- &trans    &trans     &trans     &trans                 &trans      &trans                      &trans     &trans    &trans    &trans
-#elif defined(TBLE_MIT)
- &none     &none      &none      &none      &mo LOWER_L       &none             &mo RAISE_L     &none      &none     &none     &none
-#else
- &trans    &trans     &trans     &trans     &trans      &trans      &trans      &trans          &trans     &trans    &trans    &trans
-#endif
-            >;
-        };
-
-        lower_layer {
-            label = "Lower";
+        num_layer {
+            label = "Num";
             bindings = <
  &kp NUHS   &kp N1      &N2        &N3        &N4        &kp N5      &kp N6       &kp N7       &kp N8     &kp N9     &kp N0     &kp BKSP
  &kp DEL    &kp F1      &kp F2     &kp F3     &kp F4     &kp F5      &kp F6       &kp UNDER    &kp STAR   &kp LBRC   &kp RbRC   &kp BSLH
@@ -115,15 +88,15 @@
 #ifdef TBLE_DUAL_2U
  &trans     &trans     &trans     &trans                 &trans      &trans                    &trans     &trans     &trans       &trans
 #elif defined(TBLE_MIT)
- &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT    &mo LOWER_L      &trans             &mo RAISE_L  &kp LT     &kp GT     &kp C_PREV   &kp C_NEXT
+ &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT    &mo NUM_L        &trans             &mo NAV_L    &kp LT     &kp GT     &kp C_PREV   &kp C_NEXT
 #else
  &trans     &trans     &trans     &trans      &trans     &trans      &trans       &trans       &trans     &trans     &trans       &trans
 #endif
             >;
         };
 
-        raise_layer {
-            label = "Raise";
+        nav_layer {
+            label = "Nav";
             bindings = <
  &kp GRAVE  &kp EXCL    &kp AT     &kc HASH   &kc DLLR   &kp PRCNT   &kp CARET    &kp AMPS      &kp STAR    &kp LPAR    &kc RPAR   &kp BKSP
  &kp DEL    &kp F1      &kp F2     &kp F3     &kp F4     &kp F5      &kp F6       &kp UNDER     &kp STAR    &kp MINUS   &kc GRAVE  &kc TILDE
@@ -131,9 +104,25 @@
 #ifdef TBLE_DUAL_2U
  &trans      &trans     &trans     &trans                &trans      &trans                     &trans      &trans      &trans       &trans
 #elif defined(TBLE_MIT)
- &kp LCTRL   &kp RALT   &kp LGUI   &kp LALT   &mo LOWER_L      &trans             &mo RAISE_L   &kc PIPE    &kc NUBS    &kp C_PREV   &kp C_NEXT
+ &kp LCTRL   &kp RALT   &kp LGUI   &kp LALT   &mo NUM_L        &trans             &mo NAV_L     &kc PIPE    &kc NUBS    &kp C_PREV   &kp C_NEXT
 #else
  &trans      &trans     &trans     &trans     &trans     &trans      &trans       &trans        &trans      &trans      &trans       &trans
+#endif
+            >;
+        };
+
+        sym_layer {
+            label = "Sym";
+            bindings = <
+ &none     &bt BT_CLR     &none       &none       &none       &none       &none     &none     &none      &none     &kc CAPS   &none
+ &none     &none          &none       &none       &none       &none       &none     &none     &none      &none     &none      &none
+ &none     &bt BT(0)      &bt BT(1)   &bt BT(2)   &bt BT(3)   &bt BT(4)   &none     &none     &none      &none     &none      &none
+#ifdef TBLE_DUAL_2U
+ &trans    &trans     &trans     &trans                 &trans      &trans                      &trans     &trans    &trans    &trans
+#elif defined(TBLE_MIT)
+ &none     &none      &none      &none      &mo NUM_L         &none             &mo NAV_L       &none      &none     &none     &none
+#else
+ &trans    &trans     &trans     &trans     &trans      &trans      &trans      &trans          &trans     &trans    &trans    &trans
 #endif
             >;
         };
