@@ -54,17 +54,6 @@
 	};
     };
 
-// Enable third layer (need to make it to work with all layers later without it beign conditional)
-/* #ifdef <TBLE_DUAL_2U TBLE_MIT>
-    cond_layers {
-        compatible = "zmk,conditional-layers";
-	tri {
-	    if-layers = <LOWER_L SYS_L>;
-	    then-layer = <RAISE_L>;
-        };
-    };
-#endif
-*/
     keymap {
         compatible = "zmk,keymap";
 
