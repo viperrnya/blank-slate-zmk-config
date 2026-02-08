@@ -15,9 +15,9 @@
 #define TBLE_MIT     1
 // #define TBLE_DUAL_2U 1
 
-#define NAV_L 1
-#define NUM_L 2
-#define SYM_L 3
+#define NUM_L 1
+#define SYM_L 2
+#define SYS_L 3
 
 // Using layer taps on thumbs, having quick tap as well helps w/ repeating space/backspace
 &lt { quick_tap_ms = <200>; };
@@ -72,7 +72,7 @@
 #ifdef TBLE_DUAL_2U
  &trans     &trans     &trans     &trans                 &trans       &trans                   &trans     &trans     &trans     &trans
 #elif defined(TBLE_MIT)
- &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT   &mo NUM_L         &trans            &mo NAV_L     &kc LEFT   &kc DOWN   &kc UP     &kc RIGHT
+ &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT   &mo NUM_L         &trans            &mo SYM_L     &kp LEFT   &kp DOWN   &kp UP     &kp RIGHT
 #else
  &trans     &trans     &trans     &trans     &trans      &trans       &trans     &trans        &trans     &trans     &trans     &trans
 #endif
@@ -88,25 +88,9 @@
 #ifdef TBLE_DUAL_2U
  &trans     &trans     &trans     &trans                 &trans      &trans                    &trans     &trans     &trans       &trans
 #elif defined(TBLE_MIT)
- &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT    &mo NUM_L        &trans             &mo NAV_L    &kp LT     &kp GT     &kp C_PREV   &kp C_NEXT
+ &kp LCTRL  &kp RALT   &kp LGUI   &kp LALT    &mo NUM_L        &trans             &mo SYM_L    &kp LT     &kp GT     &kp C_PREV   &kp C_NEXT
 #else
  &trans     &trans     &trans     &trans      &trans     &trans      &trans       &trans       &trans     &trans     &trans       &trans
-#endif
-            >;
-        };
-
-        nav_layer {
-            label = "Nav";
-            bindings = <
- &kp GRAVE  &kp EXCL    &kp AT     &kc HASH   &kc DLLR   &kp PRCNT   &kp CARET    &kp AMPS      &kp STAR    &kp LPAR    &kc RPAR   &kp BKSP
- &kp DEL    &kp F1      &kp F2     &kp F3     &kp F4     &kp F5      &kp F6       &kp UNDER     &kp STAR    &kp MINUS   &kc GRAVE  &kc TILDE
- &trans     &kp F7      &kp F8     &kp F9     &kp F10    &kp F11     &kp F12      &kp KP_PLUS   &kp AT      &kp PG_UP   &kc PG_DN  &kp C_PLAY
-#ifdef TBLE_DUAL_2U
- &trans      &trans     &trans     &trans                &trans      &trans                     &trans      &trans      &trans       &trans
-#elif defined(TBLE_MIT)
- &kp LCTRL   &kp RALT   &kp LGUI   &kp LALT   &mo NUM_L        &trans             &mo NAV_L     &kc PIPE    &kc NUBS    &kp C_PREV   &kp C_NEXT
-#else
- &trans      &trans     &trans     &trans     &trans     &trans      &trans       &trans        &trans      &trans      &trans       &trans
 #endif
             >;
         };
@@ -114,13 +98,29 @@
         sym_layer {
             label = "Sym";
             bindings = <
+ &kp GRAVE  &kp EXCL    &kp AT     &kp HASH   &kp DLLR   &kp PRCNT   &kp CARET    &kp AMPS      &kp STAR    &kp LPAR    &kp RPAR   &kp BKSP
+ &kp DEL    &kp F1      &kp F2     &kp F3     &kp F4     &kp F5      &kp F6       &kp UNDER     &kp STAR    &kp MINUS   &kp GRAVE  &kp TILDE
+ &trans     &kp F7      &kp F8     &kp F9     &kp F10    &kp F11     &kp F12      &kp KP_PLUS   &kp AT      &kp PG_UP   &kp PG_DN  &kp C_PLAY
+#ifdef TBLE_DUAL_2U
+ &trans      &trans     &trans     &trans                &trans      &trans                     &trans      &trans      &trans       &trans
+#elif defined(TBLE_MIT)
+ &kp LCTRL   &kp RALT   &kp LGUI   &kp LALT   &mo NUM_L        &trans             &mo SYM_L     &kp PIPE    &kp NUBS    &kp C_PREV   &kp C_NEXT
+#else
+ &trans      &trans     &trans     &trans     &trans     &trans      &trans       &trans        &trans      &trans      &trans       &trans
+#endif
+            >;
+        };
+
+        sys_layer {
+            label = "Sys";
+            bindings = <
  &none     &bt BT_CLR     &none       &none       &none       &none       &none     &none     &none      &none     &kc CAPS   &none
  &none     &none          &none       &none       &none       &none       &none     &none     &none      &none     &none      &none
  &none     &bt BT(0)      &bt BT(1)   &bt BT(2)   &bt BT(3)   &bt BT(4)   &none     &none     &none      &none     &none      &none
 #ifdef TBLE_DUAL_2U
  &trans    &trans     &trans     &trans                 &trans      &trans                      &trans     &trans    &trans    &trans
 #elif defined(TBLE_MIT)
- &none     &none      &none      &none      &mo NUM_L         &none             &mo NAV_L       &none      &none     &none     &none
+ &none     &none      &none      &none      &mo NUM_L         &none             &mo SYM_L       &none      &none     &none     &none
 #else
  &trans    &trans     &trans     &trans     &trans      &trans      &trans      &trans          &trans     &trans    &trans    &trans
 #endif
